@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FaStar } from 'react-icons/fa';
 
 import styles from './product-list-components.module.css';
+import { Wrapper } from './ProductList.styles';
 
 interface Product { 
   title: string; 
@@ -25,7 +26,7 @@ const Posts : React.FC<IPostsProps> = ({ products, onFav }) => {
     <Product key={i} index={i} product={product} onFav={onFav}/>
   ));
 
-  return <div>{productsArr.reverse()}</div>
+  return <Wrapper>{productsArr.reverse()}</Wrapper>
   
 }
 
