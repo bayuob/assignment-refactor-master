@@ -47,6 +47,7 @@ const ProductWidget: React.FC<ProductProps> = ({ index, product, onFav }) => {
       <ActionBar>
         <ActionBarItem
           className={'container'}
+          active = {product.isFavorite}
           role = "button"
           onClick = {() => { onFav(product.title) }}
         >

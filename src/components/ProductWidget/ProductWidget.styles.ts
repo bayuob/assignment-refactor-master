@@ -44,13 +44,18 @@ export const ActionBarItemLabel = styled.span`
   margin-left: 8px;
 `;
 
-export const ActionBarItem = styled.span`
+interface ActionBarItemProps {
+  active?: boolean;
+}
+
+export const ActionBarItem = styled.span<ActionBarItemProps>`
   cursor: pointer;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 8px;
+  color: ${(props) => (props.active ? '#62bfad' : 'inherit')};
 
   &:hover {
     background-color: #f4f5f9;
