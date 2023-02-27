@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import lodash from 'lodash';
 import { FaTimes } from 'react-icons/fa';
 import Modal from 'react-modal';
 
@@ -12,6 +11,10 @@ import {
 import AddProductForm from './components/AddProductForm/AddProductForm';
 import Button from './components/generic/Button';
 import ProductList from './components/ProductList/ProductList';
+import {
+  addProduct,
+  getProducts,
+} from './services/api';
 import styles from './shopApp.module.css';
 import Product from './types/Product';
 
@@ -25,100 +28,77 @@ interface ShopAppProp {
 }
 
 export class ShopApp extends Component<{}, ShopAppProp> {
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props);
-
-    this.favClick = this.favClick.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
     this.state = { products: [], isOpen: false, isShowingMessage: false, message: '', numFavorites: 0, prodCount: 0 };
-
-    fetch('https://fakestoreapi.com/products').then((response) => {
-      let jsonResponse = response.json();
-
-      jsonResponse.then((rawData) => {
-        let data = [];
-
-        for (let i = 0; i < rawData.length; i++) {
-          let updatedProd = rawData[i];
-          data.push(updatedProd);
-        }
-        this.setState({
-          products: data,
-        });
-        this.setState({
-          prodCount: data.length
-        })
-      });
-    });
   }
 
-   componentDidMount(){
-      document.title = "Droppe refactor app"
-   }
+  componentDidMount(){
+    document.title = "Droppe refactor app"
+    this.fetchProducts();
+  }
 
-  favClick(title: string) {
-    const prods = this.state.products;
-    const idx = lodash.findIndex(prods, {title: title})
-    let currentFavs = this.state.numFavorites
-    let totalFavs: any;
+  async fetchProducts(){
+    try {
+      const data = await getProducts();
 
-    if (prods[idx].isFavorite) {
-      prods[idx].isFavorite = false;
-      totalFavs = --currentFavs
+      this.setState({
+        products: data,
+        prodCount: data.length,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  favClick = (title: string) => {
+    const { products } = this.state;
+    const idx = products.findIndex((prod) => prod.title === title);
+
+    const updatedProducts = [...products];
+    let { numFavorites } = this.state;
+
+    if (updatedProducts[idx].isFavorite) {
+      updatedProducts[idx].isFavorite = false;
+      numFavorites--;
     } else {
-      totalFavs = ++currentFavs
-      prods[idx].isFavorite = true;
+      updatedProducts[idx].isFavorite = true;
+      numFavorites++;
     }
 
-    this.setState(() => ({ products: prods, numFavorites: totalFavs }));
-  }
+    this.setState({ products: updatedProducts, numFavorites });
+  };
 
-  onSubmit(payload: { title: string; description: string, price: number }) {
-    const updated = lodash.clone(this.state.products);
-    updated.push({
+  onSubmit = async(payload: Product) => {
+    const { products } = this.state;
+    const updatedProducts = [...products];
+
+    updatedProducts.push({
       title: payload.title,
       description: payload.description,
-      price: payload.price
-    });
-
-    this.setState({
-      products: updated,
-      prodCount: lodash.size(this.state.products) + 1
+      price: payload.price,
     });
 
     this.setState({
       isOpen: false,
+      isShowingMessage: true,
+      message: 'Adding product...',
     });
 
-    this.setState({
-      isShowingMessage: true,
-      message: 'Adding product...'
-    })
-
-    // **this POST request doesn't actually post anything to any database**
-    fetch('https://fakestoreapi.com/products',{
-            method:"POST",
-            body:JSON.stringify(
-                {
-                    title: payload.title,
-                    price: payload.price,
-                    description: payload.description,
-                }
-            )
-        })
-            .then(res=>res.json())
-            .then(json => {
-               (function (t) {
-                 setTimeout(()=>{
-                    t.setState({
-                       isShowingMessage: false,
-                       message: ''
-                    })
-                 }, 2000)
-              })(this);
-            })
-  }
+    try {
+      await addProduct(payload);
+      setTimeout(() => {
+        this.setState({
+          products: updatedProducts,
+          prodCount: products.length + 1,
+          isShowingMessage: false,
+          message: '',
+        });
+      }, 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   render() {
     const { products, isOpen } = this.state;
