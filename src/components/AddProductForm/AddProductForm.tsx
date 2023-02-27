@@ -43,6 +43,15 @@ const AddProductForm: React.FC<FormProps> = ({ onSubmit }) => {
     formRef.current?.reset();
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const pattern = /[0-9]/;
+    const inputChar = String.fromCharCode(e.charCode);
+
+    if (!pattern.test(inputChar)) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <Form onSubmit = {handleSubmit} ref = {formRef}>
       <Label>Product title: *</Label>
@@ -57,6 +66,10 @@ const AddProductForm: React.FC<FormProps> = ({ onSubmit }) => {
       <Input
         ref={priceRef}
         placeholder="Price..."
+        type="number"
+        min="0"
+        step="0.01"
+        onKeyPress={handleKeyPress}
       />
 
       <TextArea
