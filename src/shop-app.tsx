@@ -4,9 +4,11 @@ import lodash from 'lodash';
 import { FaTimes } from 'react-icons/fa';
 import Modal from 'react-modal';
 
-import logo from './assets/images/droppe-logo.png';
-import img1 from './assets/images/img1.png';
-import img2 from './assets/images/img2.png';
+import {
+  img1,
+  img2,
+  logo,
+} from './assets/images';
 import { Button } from './components/button';
 import { Form } from './components/form';
 import ProductList from './components/product-list-components';
