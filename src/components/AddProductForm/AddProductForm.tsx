@@ -1,5 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 
+import Product from '../../types/Product';
 import {
   Button,
   Form,
@@ -9,12 +10,6 @@ import {
   Label,
   TextArea,
 } from './AddProductForm.styles';
-
-interface Product {
-  title: string;
-  description: string;
-  price: number;
-}
 
 interface FormProps {
   onSubmit: (payload: Product) => void;

@@ -1,18 +1,8 @@
 import React from 'react';
 
+import Product from '../../types/Product';
 import ProductWidget from '../ProductWidget';
 import { Wrapper } from './ProductList.styles';
-
-interface Product { 
-  title: string; 
-  description: string; 
-  price: number; 
-  isFavorite: boolean; 
-  rating: {
-    rate: number; 
-    count: number
-  }
-}
 
 interface Props {
   products: Product[];

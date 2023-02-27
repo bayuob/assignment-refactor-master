@@ -2,6 +2,7 @@ import React from 'react';
 
 import { FaStar } from 'react-icons/fa';
 
+import Product from '../../types/Product';
 import {
   ActionBar,
   ActionBarItem,
@@ -11,26 +12,15 @@ import {
   ProductTitle,
 } from './ProductWidget.styles';
 
-interface Product { 
-    title: string; 
-    description: string; 
-    price: number; 
-    isFavorite: boolean; 
-    rating: {
-      rate: number; 
-      count: number
-    }
-}
-
 interface ProductProps {
-    index: number;
-    product: Product;
-    onFav: (title: string) => void;
+  index: number;
+  product: Product;
+  onFav: (title: string) => void;
 }
 
 const ProductWidget: React.FC<ProductProps> = ({ index, product, onFav }) => {
   return (
-    <ProductContainer>
+    <ProductContainer data-testid="product-widget">
       <ProductTitle>{product.title}</ProductTitle>
 
       {product.rating && (
@@ -50,6 +40,7 @@ const ProductWidget: React.FC<ProductProps> = ({ index, product, onFav }) => {
           active = {product.isFavorite}
           role = "button"
           onClick = {() => { onFav(product.title) }}
+          data-testid="product-fav-button"
         >
           <FaStar />
           <ActionBarItemLabel>
