@@ -9,8 +9,8 @@ import {
   img2,
   logo,
 } from './assets/images';
-import { Button } from './components/button';
 import { Form } from './components/form';
+import Button from './components/generic/Button';
 import ProductList from './components/product-list-components';
 import styles from './shopApp.module.css';
 
