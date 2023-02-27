@@ -67,7 +67,7 @@ export class ShopApp extends React.Component<
     this.setState(() => ({ products: prods, numFavorites: totalFavs }));
   }
 
-  onSubmit(payload: { title: string; description: string, price: string }) {
+  onSubmit(payload: { title: string; description: string, price: number }) {
     const updated = lodash.clone(this.state.products);
     updated.push({
       title: payload.title,
