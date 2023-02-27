@@ -11,7 +11,7 @@ import {
 } from './assets/images';
 import AddProductForm from './components/AddProductForm/AddProductForm';
 import Button from './components/generic/Button';
-import ProductList from './components/ProductList/product-list-components';
+import ProductList from './components/ProductList/ProductList';
 import styles from './shopApp.module.css';
 
 export class ShopApp extends React.Component<

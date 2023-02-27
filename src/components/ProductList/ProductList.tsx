@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import ProductWidget from '../ProductWidget';
 import { Wrapper } from './ProductList.styles';
@@ -14,18 +14,18 @@ interface Product {
   }
 }
 
-interface IPostsProps {
+interface Props {
   products: Product[];
   onFav: (title: string) => void;
 }
 
-const Posts : React.FC<IPostsProps> = ({ products, onFav }) => {
+const ProductList: React.FC<Props> = ({ products, onFav }) => {
   const productsArr = products.map((product, i) => (
     <ProductWidget key={i} index={i} product={product} onFav={onFav}/>
   ));
-
-  return <Wrapper>{productsArr.reverse()}</Wrapper>
   
-}
+  return <Wrapper>{productsArr.reverse()}</Wrapper>;
+};
 
-export default Posts;
+
+export default ProductList;
