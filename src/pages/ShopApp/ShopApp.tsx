@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 
-import { FaTimes } from 'react-icons/fa';
-import Modal from 'react-modal';
-
 import {
   img1,
   img2,
   logo,
 } from '../../assets/images';
-import AddProductForm from '../../components/AddProductForm/AddProductForm';
-import Button from '../../components/generic/Button';
-import ProductList from '../../components/ProductList/ProductList';
+import AddProductForm from '../../components/AddProductForm';
+import {
+  Button,
+  Modal,
+} from '../../components/generic';
+import ProductList from '../../components/ProductList';
 import {
   addProduct,
   getProducts,
 } from '../../services/api';
 import Product from '../../types/Product';
-import styles from './shopApp.module.css';
 import {
   ButtonWrapper,
   Header,
@@ -154,28 +153,10 @@ export class ShopApp extends Component<{}, ShopAppProp> {
           {products && !!products.length ? <ProductList products = {products} onFav = {this.favClick} /> : <div></div>}
         </MainBody>
 
-        <>
-           <Modal
-              isOpen={isOpen}
-              className={styles.reactModalContent}
-              overlayClassName={styles.reactModalOverlay}
-           >
-              <div className={styles.modalContentHelper}>
-                 <div
-                    className={styles.modalClose}
-                    onClick={function (this: any) {
-                       this.setState({
-                          isOpen: false,
-                       });
-                    }.bind(this)}
-                 ><FaTimes /></div>
+        <Modal isOpen = {isOpen} onClose = { () => { this.setState({ isOpen: false }) } } >
+          <AddProductForm onSubmit={this.onSubmit}/>
+        </Modal>
 
-                 <AddProductForm
-                    onSubmit={this.onSubmit}
-                 />
-              </div>
-           </Modal>
-        </>
       </React.Fragment>
     );
   }
