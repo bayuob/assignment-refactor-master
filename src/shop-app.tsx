@@ -175,7 +175,7 @@ export class ShopApp extends React.Component<
                  ><FaTimes /></div>
 
                  <Form
-                    on-submit={this.onSubmit}
+                    onSubmit={this.onSubmit}
                  />
               </div>
            </Modal>

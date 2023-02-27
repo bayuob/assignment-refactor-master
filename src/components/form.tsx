@@ -10,34 +10,32 @@ interface Product {
 }
 
 interface FormProps {
-  "on-submit": (payload: Product) => void;
+  onSubmit: (payload: Product) => void;
 }
 
-export const Form: React.FC<FormProps> = (props) => {
+export const Form: React.FC<FormProps> = ({ onSubmit }) => {
   let formRef = React.useRef<HTMLFormElement>(null);
   let titleRef = React.useRef<HTMLInputElement>(null);
   let priceRef = React.useRef<HTMLInputElement>(null);
   let descriptionRef = React.useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!titleRef.current?.value) {
       alert("Your product needs a title");
-
       return;
     }
 
     if (!descriptionRef.current?.value || !priceRef.current?.value) {
       alert("Your product needs some content");
-
       return;
     }
 
-    props["on-submit"]({
-      title: titleRef.current && titleRef.current.value,
-      description: descriptionRef.current && descriptionRef.current.value,
-      price: priceRef.current && parseFloat(priceRef.current.value || '0'),
+    onSubmit({
+      title: titleRef.current?.value,
+      description: descriptionRef.current?.value,
+      price: parseFloat(priceRef.current?.value || '0'),
     });
 
     formRef.current?.reset();
