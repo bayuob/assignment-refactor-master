@@ -20,7 +20,7 @@ interface ProductProps {
 
 const ProductWidget: React.FC<ProductProps> = ({ index, product, onFav }) => {
   return (
-    <ProductContainer>
+    <ProductContainer data-testid="product-widget">
       <ProductTitle>{product.title}</ProductTitle>
 
       {product.rating && (
@@ -40,6 +40,7 @@ const ProductWidget: React.FC<ProductProps> = ({ index, product, onFav }) => {
           active = {product.isFavorite}
           role = "button"
           onClick = {() => { onFav(product.title) }}
+          data-testid="product-fav-button"
         >
           <FaStar />
           <ActionBarItemLabel>
