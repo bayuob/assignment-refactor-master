@@ -1,9 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Modal from "react-modal"
-import "./index.css";
-import { ShopApp } from "./shop-app";
-import * as serviceWorker from "./serviceWorker";
+import './index.css';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Modal from 'react-modal';
+
+import * as serviceWorker from './services/serviceWorker';
+import { ShopApp } from './shop-app';
 
 Modal.setAppElement("#root")
 
