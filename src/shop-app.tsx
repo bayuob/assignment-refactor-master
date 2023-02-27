@@ -4,12 +4,12 @@ import lodash from 'lodash';
 import { FaTimes } from 'react-icons/fa';
 import Modal from 'react-modal';
 
+import logo from './assets/images/droppe-logo.png';
+import img1 from './assets/images/img1.png';
+import img2 from './assets/images/img2.png';
 import { Button } from './components/button';
 import { Form } from './components/form';
 import ProductList from './components/product-list-components';
-import logo from './images/droppe-logo.png';
-import img1 from './images/img1.png';
-import img2 from './images/img2.png';
 import styles from './shopApp.module.css';
 
 export class ShopApp extends React.Component<
