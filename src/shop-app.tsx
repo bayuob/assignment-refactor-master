@@ -9,7 +9,7 @@ import {
   img2,
   logo,
 } from './assets/images';
-import { Form } from './components/form';
+import { Form } from './components/AddProductForm/form';
 import Button from './components/generic/Button';
 import ProductList from './components/product-list-components';
 import styles from './shopApp.module.css';
