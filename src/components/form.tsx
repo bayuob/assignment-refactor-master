@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import styles from './form.module.css';
 import Button from './generic/Button';
+import FormWrapper from './generic/Form';
 
 interface Product {
   title: string;
@@ -42,7 +43,7 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form className={styles.form} onSubmit = {handleSubmit} ref = {formRef}>
+    <FormWrapper onSubmit = {handleSubmit} ref = {formRef}>
       <span className={styles.label}>Product title: *</span>
 
       <input
@@ -66,6 +67,6 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
       />
 
       <Button>Add a product</Button>
-    </form>
+    </FormWrapper>
   );
 };
