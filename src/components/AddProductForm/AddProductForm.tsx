@@ -1,8 +1,12 @@
 import * as React from 'react';
 
 import Button from '../generic/Button';
-import FormWrapper from '../generic/Form';
-import styles from './form.module.css';
+import Form from '../generic/Form';
+import {
+  Input,
+  Label,
+  TextArea,
+} from './AddProductForm.styles';
 
 interface Product {
   title: string;
@@ -43,31 +47,28 @@ const AddProductForm: React.FC<FormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <FormWrapper onSubmit = {handleSubmit} ref = {formRef}>
-      <span className={styles.label}>Product title: *</span>
+    <Form onSubmit = {handleSubmit} ref = {formRef}>
+      <Label>Product title: *</Label>
 
-      <input
+      <Input
         ref={titleRef}
         placeholder="Title..."
-        className={styles.input}
       />
 
-      <span className={styles.label}>Product details: *</span>
+      <Label>Product details: *</Label>
 
-      <input
+      <Input
         ref={priceRef}
         placeholder="Price..."
-        className={styles.input}
       />
 
-      <textarea
+      <TextArea
         ref={descriptionRef}
         placeholder="Start typing product description here..."
-        className={styles.textarea}
       />
 
       <Button>Add a product</Button>
-    </FormWrapper>
+    </Form>
   );
 };
 
