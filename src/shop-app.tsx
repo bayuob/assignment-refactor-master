@@ -9,7 +9,7 @@ import {
   img2,
   logo,
 } from './assets/images';
-import { Form } from './components/AddProductForm/form';
+import AddProductForm from './components/AddProductForm/AddProductForm';
 import Button from './components/generic/Button';
 import ProductList from './components/product-list-components';
 import styles from './shopApp.module.css';
@@ -174,7 +174,7 @@ export class ShopApp extends React.Component<
                     }.bind(this)}
                  ><FaTimes /></div>
 
-                 <Form
+                 <AddProductForm
                     onSubmit={this.onSubmit}
                  />
               </div>

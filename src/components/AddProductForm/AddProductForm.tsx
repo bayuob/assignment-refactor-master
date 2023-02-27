@@ -14,7 +14,7 @@ interface FormProps {
   onSubmit: (payload: Product) => void;
 }
 
-export const Form: React.FC<FormProps> = ({ onSubmit }) => {
+const AddProductForm: React.FC<FormProps> = ({ onSubmit }) => {
   let formRef = React.useRef<HTMLFormElement>(null);
   let titleRef = React.useRef<HTMLInputElement>(null);
   let priceRef = React.useRef<HTMLInputElement>(null);
@@ -70,3 +70,5 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
     </FormWrapper>
   );
 };
+
+export default AddProductForm;
