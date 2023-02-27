@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 
 import lodash from 'lodash';
 import { FaTimes } from 'react-icons/fa';
@@ -13,11 +13,18 @@ import AddProductForm from './components/AddProductForm/AddProductForm';
 import Button from './components/generic/Button';
 import ProductList from './components/ProductList/ProductList';
 import styles from './shopApp.module.css';
+import Product from './types/Product';
 
-export class ShopApp extends React.Component<
-  {},
-  { products: any[]; isOpen: boolean; isShowingMessage: boolean; message: string; numFavorites: number; prodCount: number }
-> {
+interface ShopAppProp {
+  products: Product[];
+  isOpen: boolean;
+  isShowingMessage: boolean;
+  message: string;
+  numFavorites: number;
+  prodCount: number;
+}
+
+export class ShopApp extends Component<{}, ShopAppProp> {
   constructor(props: any) {
     super(props);
 
