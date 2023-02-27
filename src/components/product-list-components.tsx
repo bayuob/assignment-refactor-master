@@ -1,28 +1,35 @@
-import * as React from "react";
-import lodash from 'lodash'
-import { FaStar } from "react-icons/fa";
-import styles from "./product-list-components.module.css";
+import * as React from 'react';
 
-interface IPostsProps {
-  products: any;
-  onFav: (title: string) => void;
-}
+import { FaStar } from 'react-icons/fa';
 
+import styles from './product-list-components.module.css';
 
-export default class Posts extends React.Component<IPostsProps, {}> {
-  constructor(props: any) { super(props) }
-  render(){
-    let productsarr = []
-      for (const [i, p] of this.props.products.entries()) {
-        productsarr.push(
-          <Product key={i} index={i} product={p} onFav={this.props.onFav} />
-        );
-    }
-    return <div>{lodash.reverse(productsarr)}</div>
+interface Product { 
+  title: string; 
+  description: string; 
+  price: number; 
+  isFavorite: boolean; 
+  rating: {
+    rate: number; 
+    count: number
   }
 }
 
-export const Product: React.FC<{
+interface IPostsProps {
+  products: Product[];
+  onFav: (title: string) => void;
+}
+
+const Posts : React.FC<IPostsProps> = ({ products, onFav }) => {
+  const productsArr = products.map((product, i) => (
+    <Product key={i} index={i} product={product} onFav={onFav}/>
+  ));
+
+  return <div>{productsArr.reverse()}</div>
+  
+}
+
+const Product: React.FC<{
   index: number;
   product: { title: string; description: string; price: number; isFavorite: boolean; rating: {rate: number; count: number} };
   onFav: (title: string) => void;
@@ -59,3 +66,5 @@ export const Product: React.FC<{
     </span>
   );
 };
+
+export default Posts;
