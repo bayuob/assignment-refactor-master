@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 
 import Modal from 'react-modal';
 
+import { ShopApp } from './pages/ShopApp/shop-app';
 import * as serviceWorker from './services/serviceWorker';
-import { ShopApp } from './shop-app';
 
 Modal.setAppElement("#root")
 

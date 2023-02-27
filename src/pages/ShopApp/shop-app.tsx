@@ -7,16 +7,16 @@ import {
   img1,
   img2,
   logo,
-} from './assets/images';
-import AddProductForm from './components/AddProductForm/AddProductForm';
-import Button from './components/generic/Button';
-import ProductList from './components/ProductList/ProductList';
+} from '../../assets/images';
+import AddProductForm from '../../components/AddProductForm/AddProductForm';
+import Button from '../../components/generic/Button';
+import ProductList from '../../components/ProductList/ProductList';
 import {
   addProduct,
   getProducts,
-} from './services/api';
+} from '../../services/api';
+import Product from '../../types/Product';
 import styles from './shopApp.module.css';
-import Product from './types/Product';
 
 interface ShopAppProp {
   products: Product[];
