@@ -22,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         <ModalOverlay>
           <ModalContent>
             <ModalContentHelper>
-              <ModalClose onClick={onClose}>
+              <ModalClose onClick={onClose} data-testid="modal-close">
                 <FaTimes />
               </ModalClose>
               {children}
