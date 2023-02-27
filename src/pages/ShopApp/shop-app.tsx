@@ -17,6 +17,17 @@ import {
 } from '../../services/api';
 import Product from '../../types/Product';
 import styles from './shopApp.module.css';
+import {
+  ButtonWrapper,
+  Header,
+  HeaderImage,
+  HeaderImageWrapper,
+  MainBody,
+  MainImage,
+  MainImages,
+  MessageContainer,
+  StatsContainer,
+} from './ShopApp.styles';
 
 interface ShopAppProp {
   products: Product[];
@@ -101,49 +112,47 @@ export class ShopApp extends Component<{}, ShopAppProp> {
   };
 
   render() {
-    const { products, isOpen } = this.state;
+    const { products, isOpen, isShowingMessage, message, numFavorites, prodCount } = this.state;
     return (
       <React.Fragment>
-        <div className={styles.header}>
-          <div className={['container', styles.headerImageWrapper].join(' ')}>
-            <img src={logo} className={styles.headerImage} />
-          </div>
-        </div>
+        <Header>
+          <HeaderImageWrapper className={'container'}>
+            <HeaderImage src={logo} alt="Droppe logo"/>
+          </HeaderImageWrapper>
+        </Header>
 
         <>
-           <span
-              className={['container', styles.main].join(' ')}
-              style={{margin: '50px inherit', display: 'flex', justifyContent: 'space-evenly'}}
-           >
-            <img src={img1} style={{maxHeight: "15em", display: 'block'}} />
-            <img src={img2} style={{maxHeight: "15rem", display: 'block'}} />
-           </span>
+          <MainImages className={'container'}>
+            <MainImage src={img1} />
+            <MainImage src={img2} />
+          </MainImages>
         </>
 
-        <div className={['container', styles.main].join(' ')} style={{paddingTop: 0}}>
-          <div className={styles.buttonWrapper}>
-            <span role="button">
-               <Button
-                  onClick={function (this: any) {
-                     this.setState({
-                        isOpen: true,
-                     });
-                  }.bind(this)}
-               >Send product proposal</Button>
-            </span>
-             {this.state.isShowingMessage && <div className={styles.messageContainer}>
-                <i>{this.state.message}</i>
-             </div>}
-          </div>
+        <MainBody className={'container'}>
+          <ButtonWrapper >
+            <Button
+                onClick={() => {
+                    this.setState({
+                      isOpen: true,
+                    });
+                  }
+                }
+            >
+              Send product proposal
+            </Button>
+            {isShowingMessage && 
+              <MessageContainer> <i>{message}</i> </MessageContainer>
+            }
+          </ButtonWrapper>
 
-          <div className={styles.statsContainer}>
-            <span>Total products: {this.state.prodCount}</span>
+          <StatsContainer>
+            <span>Total products: {prodCount}</span>
             {' - '}
-            <span>Number of favorites: {this.state.numFavorites}</span>
-          </div>
+            <span>Number of favorites: {numFavorites}</span>
+          </StatsContainer>
 
-          {products && !!products.length ? <ProductList products={products} onFav={this.favClick} /> : <div></div>}
-        </div>
+          {products && !!products.length ? <ProductList products = {products} onFav = {this.favClick} /> : <div></div>}
+        </MainBody>
 
         <>
            <Modal
