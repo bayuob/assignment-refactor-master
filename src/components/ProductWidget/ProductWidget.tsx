@@ -2,7 +2,14 @@ import React from 'react';
 
 import { FaStar } from 'react-icons/fa';
 
-import styles from '../ProductList/product-list-components.module.css';
+import {
+  ActionBar,
+  ActionBarItem,
+  ActionBarItemLabel,
+  ProductBody,
+  ProductContainer,
+  ProductTitle,
+} from './ProductWidget.styles';
 
 interface Product { 
     title: string; 
@@ -13,7 +20,7 @@ interface Product {
       rate: number; 
       count: number
     }
-  }
+}
 
 interface ProductProps {
     index: number;
@@ -22,37 +29,35 @@ interface ProductProps {
 }
 
 const ProductWidget: React.FC<ProductProps> = ({ index, product, onFav }) => {
-    const {product: productClass, productBody, actionBarItem, actionBarItemLabel} = styles
-    // Problem: Now product title can be too long, I just put overflowX as fix now
-    return (
-      <span className={productClass} style={{display: 'inline-block', overflowX: 'scroll', float: 'none', clear: 'both'}}>
-        <span className={styles['product-title']} style={{overflowX: 'hidden'}}>{product.title}</span>
-  
-        <p><strong>Rating: {product.rating ? `${product.rating.rate}/5` : ''}</strong></p>
-  
-        <p><b>Price: ${+product.price}</b></p>
-  
-        <p className={productBody}>
-          <span><b>Description:</b></span>
-          <br/>
-          {product.description}
-       </p>
-  
-        <span className={styles['action_bar']} style={{display: 'table', width: "100%"}}>
-          <span
-            className={`${actionBarItem} ${
-              product.isFavorite ? "active" : ""
-            }`}
-            role="button"
-            onClick={() => {
-                onFav(product.title);
-            }}
-          >
-            <FaStar /> <span className={actionBarItemLabel}>{!!(!!(product.isFavorite)) ? 'Remove from favorites' : 'Add to favorites'}</span>
-          </span>
-        </span>
-      </span>
-    );
-  };
+  return (
+    <ProductContainer>
+      <ProductTitle>{product.title}</ProductTitle>
 
-  export default ProductWidget;
+      {product.rating && (
+        <p><strong>Rating: {product.rating.rate}/5</strong></p>
+      )}
+
+      <p><strong>Price: ${product.price.toFixed(2)}</strong></p>
+
+      <ProductBody>
+        <span><strong>Description:</strong></span><br/>
+        {product.description}
+      </ProductBody>
+
+      <ActionBar>
+        <ActionBarItem
+          className={'container'}
+          role = "button"
+          onClick = {() => { onFav(product.title) }}
+        >
+          <FaStar />
+          <ActionBarItemLabel>
+            {product.isFavorite ? "Remove from favorites" : "Add to favorites"}
+          </ActionBarItemLabel>
+         </ActionBarItem>
+      </ActionBar>
+    </ProductContainer>
+  );
+};
+
+export default ProductWidget;
