@@ -42,13 +42,12 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <form className={styles.form} onSubmit={(event) => handleSubmit(event)} ref={formRef}>
+    <form className={styles.form} onSubmit = {handleSubmit} ref = {formRef}>
       <span className={styles.label}>Product title: *</span>
 
       <input
         ref={titleRef}
         placeholder="Title..."
-        defaultValue=""
         className={styles.input}
       />
 
@@ -57,14 +56,12 @@ export const Form: React.FC<FormProps> = ({ onSubmit }) => {
       <input
         ref={priceRef}
         placeholder="Price..."
-        defaultValue=""
         className={styles.input}
       />
 
       <textarea
         ref={descriptionRef}
         placeholder="Start typing product description here..."
-        defaultValue=""
         className={styles.textarea}
       />
 
