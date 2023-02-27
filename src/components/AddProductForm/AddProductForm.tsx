@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-import Button from '../generic/Button';
-import Form from '../generic/Form';
+import {
+  Button,
+  Form,
+} from '../generic';
 import {
   Input,
   Label,
